@@ -5,7 +5,6 @@
 
 }
 body {
-    #background: #000000 !important;
     background: url(Batman_HD.png) no-repeat;
     background-color: #000000;
     background-size: cover;
@@ -22,7 +21,7 @@ h1,h2,h3,h4,h5,h6,label,span {
 
 body, html, .App, #root, .auth-wrapper {
     width: 100%;
-    height: 100%;
+    height: 105%;
 }
 
 .navbar-light {
@@ -48,7 +47,7 @@ body, html, .App, #root, .auth-wrapper {
 }
 
 .auth-wrapper .form-control:focus {
-    border-color: #000000;
+    border-color: #ffc733;
     box-shadow: none;
 }
 
