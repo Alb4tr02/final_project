@@ -7,6 +7,11 @@ const app = express();
 
 // settings
 app.set('port', process.env.PORT || 3000);
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+});
+
 app.set('views', path.join(__dirname, 'views'));
 app.engine('.hbs', exphbs({
     defaultLayout: 'main',
@@ -17,8 +22,8 @@ app.set('view engine', '.hbs');
 
 // middlewares
 app.use(morgan('dev'));
-app.use(express.urlencoded({extended: false}));
-
+//app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({extended: true}));
 
 // routes
 app.use(require('./routes/index'));

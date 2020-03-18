@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import axios from 'axios';
+import qs from 'qs';
 
 export default class Login extends Component {
 	constructor(props){
 		super(props)
 		this.state = {
 			cmp_email: '',
-			cmp_password: ''
-				}
+			password: ''
+			}
 		}
 		valueToState = (target) => {
 			this.setState( () => {
@@ -16,9 +17,12 @@ export default class Login extends Component {
 		}
 		handleSumbit = (event) => {
 			event.preventDefault();
-			console.log(this.state);
-			const url = 'https://jsonplaceholder.typicode.com/post'
-			axios.post(url, this.state)
+			const api = 'http://localhost:3000/login';
+			axios({
+				method: 'post',
+				url: api,
+				data: qs.stringify(this.state)
+			})
 			.then(response => {
 				console.log(response)
 			})
@@ -28,7 +32,7 @@ export default class Login extends Component {
 		}
 		/*<pre> {JSON.stringify(this.state, null, 2)} </pre>*/ 
 	render() {
-		const {cmp_email, cmp_password} = this.state
+		const {cmp_email, password} = this.state
 		return (
 			<div>
 	    	<form onSubmit={this.handleSumbit}>
@@ -43,7 +47,7 @@ export default class Login extends Component {
 	    
 				<div className="form-group">
 					<label>Password</label>
-					<input type="password" className="form-control" placeholder="Enter password" name='cmp_password' value={cmp_password}
+					<input type="password" className="form-control" placeholder="Enter password" name='password' value={password}
 					onChange={event => this.valueToState(event.target)}/>
 				</div>
 

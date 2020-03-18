@@ -65,8 +65,11 @@ router.get('/company', (req, res) => {
     
 });
 router.post('/login', (req, res) => {
-    console.log(req.body.email);
-    admin.auth().signInWithEmailAndPassword(req.body.email, req.body.password)
+    console.log("req.body.email:")
+    console.log(req.body);
+    console.log(req.body.cmp_email);
+    console.log(req.body.password);
+    admin.auth().signInWithEmailAndPassword(req.body.cmp_email, req.body.password)
     .then(function() {
         //aca toca meter passport, creo. :v
         console.log("Estoy dentro, trinity");
@@ -97,16 +100,18 @@ router.post('/login', (req, res) => {
 // Endpoint para crear nueva compania
 router.post('/new-company', (req, res) => {
     
-    console.log(req.body); //parametros que se pasan al endpoint con los datos de la compania
+    console.log("req body:"); //parametros que se pasan al endpoint con los datos de la compania
+    console.log(req.body);
     const newCompany = {
         cmp_name: req.body.cmp_name,
         cmp_email: req.body.cmp_email,
         cmp_cel: req.body.cmp_cel, 
     };
-    
+    console.log("Respuesta API:");
+    console.log(newCompany);
     // Crear nuevo usuario en firebase
     // API nueva
-    admin.auth().createUserWithEmailAndPassword(newCompany.cmp_email, req.body.password1)
+    admin.auth().createUserWithEmailAndPassword(newCompany.cmp_email, req.body.password)
     .then(function() {
           // si todo sale bien se crea un nuevo valor en la tabla companies
           console.log('Successfully created new user:', newCompany.cmp_email);

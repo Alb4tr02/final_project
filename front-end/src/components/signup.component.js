@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Alert, Button } from 'reactstrap';
+
 import axios from 'axios';
+import qs from 'qs'
 
 export default class SignUp extends Component {
     constructor(props) {
@@ -27,15 +29,19 @@ export default class SignUp extends Component {
 		this.setState({value_confirm: !this.state.value_confirm})
 	}
 	valueToState = (target) => {
-		this.setState( () => {
-				return { [target.name]: target.value}
-		})
+		this.setState( { [target.name]: target.value }) 
 	}
+
 	handleSumbit = (event) => {
 		event.preventDefault();
-		console.log(this.state);
-		const url = 'https://jsonplaceholder.typicode.com/post'
-		axios.post(url, this.state)
+		const api = 'http://localhost:3000/new-company';
+		const user = {cmp_name:'tony', cmp_email: 'hola@hotmail.com', cmp_cel: '30003241', password: 'holamundo'};
+		console.log(user);
+		axios({
+			method: 'post',
+			url: api,
+			data: qs.stringify(this.state)
+		})
 		.then(response => {
 			console.log(response)
 		})
